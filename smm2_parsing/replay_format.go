@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"os"
 	"strings"
 )
 
@@ -266,10 +265,10 @@ func (s *Replay) Load(buf []byte) error {
 			key, _ := reader.ReadByte()
 			time, _ := reader.ReadByte()
 
-			// For some cursed reason it's possible for joysticks to immediately continue after s byte
-			// TODO ensure s check is correct for all replays (have encountered 0x00 and 0x01 for preContinueKey[1])
+			// For some cursed reason it's possible for joysticks to immediately continue after this byte
+			// TODO ensure this check is correct for all replays (have encountered 0x00 and 0x01 for preContinueKey[1])
 			if (key & 0b00000100) == 0b00000100 {
-				// If s happens, seek back 2 bytes
+				// If this happens, seek back 2 bytes
 				key = 0x80
 				time = 0x00
 				reader.Seek(-2, 1)
@@ -327,7 +326,7 @@ func (s *Replay) Load(buf []byte) error {
 						break
 					} else if continueKey == 0x10 {
 						// End of the file
-						//handleTimePassed(0x10)
+						//s.HandleTimePassed(0x10)
 						endFrameCheck = true
 						includeEnding = false
 						ended = true
@@ -415,25 +414,4 @@ func (s *Replay) GetTASText() string {
 		}
 	}
 	return output
-}
-
-func main() {
-	//replays := []string{"auto_long_9.699.bin", "auto_long_holdrun_9.699.bin", "auto_long_holdrun2_9.699.bin", "auto_long_holdthenrelease_9.699.bin", "auto_long_holdthenrelease16_9.699.bin", "auto_right.bin", "joysticks_complicated.bin", "kaizo_10.761.bin", "long_27.051.bin", "long_level.bin", "long_level_dpad.bin", "right.bin", "right_backandforth_11.000.bin", "right_dpad.bin", "right_dpad_complicated.bin", "right_dpad_complicated2.bin", "right_dpad_pause.bin", "right_dpad_run.bin", "right_joystick_run.bin", "right_joystick_run2.bin", "right_long.bin", "right_long_5.466.bin", "right_long_dpad.bin", "right_long_dpad_pause.bin", "right_long_pause.bin", "right_pause.bin", "right_spinjump_2.866.bin", "up_down_left_right_joysticks.bin", "up_down_left_right_joysticks2.bin"}
-	replays := []string{"testreplay.bin"}
-
-	for _, replayName := range replays {
-		replay, err := os.ReadFile(replayName)
-		if err != nil {
-			panic(err)
-		}
-
-		reader := &Replay{}
-		err = reader.Load(replay)
-		if err != nil {
-			panic(err)
-		}
-
-		os.WriteFile("script0-1.txt", []byte(reader.GetTASText()), 0644)
-	}
-
 }
