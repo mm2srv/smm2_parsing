@@ -80,7 +80,7 @@ Get nx-tas compatible tas script from replay. Due to slight differences there wi
 ```go
 import (
 	"os"
-	"github.com/TheGreatRambler/smm2_parsing"
+	"github.com/mm2srv/smm2_parsing"
 )
 
 encrypted, err := os.ReadFile("test.bcd")
@@ -105,7 +105,7 @@ Read encrypted BCD from disk, decrypt it, compress it and write it to disk.
 ```go
 import (
 	"os"
-	"github.com/TheGreatRambler/smm2_parsing"
+	"github.com/mm2srv/smm2_parsing"
 )
 
 decrypted, err := os.ReadFile("thumbnail.jpg")
@@ -126,7 +126,7 @@ Read thumbnail from disk and encrypt it so it is accepted by the game.
 ```go
 import (
 	"os"
-	"github.com/TheGreatRambler/smm2_parsing"
+	"github.com/mm2srv/smm2_parsing"
 )
 
 decrypted, err := os.ReadFile("decrypted.bcd")
@@ -158,7 +158,7 @@ Read decrypted BCD from disk, remove upload flag and write it back to disk.
 import (
 	"os"
     "fmt"
-	"github.com/TheGreatRambler/smm2_parsing"
+	"github.com/mm2srv/smm2_parsing"
 )
 
 replayFile, err := os.ReadFile("replay.bin")

@@ -1,4 +1,4 @@
-module github.com/TheGreatRambler/smm2_parsing
+module github.com/mm2srv/smm2_parsing
 
 go 1.20
 
