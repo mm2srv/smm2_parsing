@@ -165,7 +165,7 @@ type LevelArea struct {
 	BoundaryType              uint8
 	Orientation               uint8
 	LiquidEndHeight           uint8
-	LiquidMode                uint8
+	LiquidType                uint8
 	LiquidSpeed               uint8
 	LiquidStartHeight         uint8
 	BoundaryRight             uint32

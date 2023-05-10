@@ -3,7 +3,7 @@ package smm2_parsing
 // Some of these values come from https://github.com/TheGreatRambler/toost/blob/main/src/LevelParser.hpp
 // and others come from https://github.com/liamadvance/smm2-documentation/blob/master/Course%20Format.md
 
-type ObjId int
+type ObjId uint16
 
 const (
 	GOOMBA                  ObjId = 0
@@ -141,7 +141,7 @@ const (
 	ON_OFF_TRAMPOLINE       ObjId = 132
 )
 
-type ClearConId int
+type ClearConId uint32
 
 const (
 	CLEARCON_NONE                                                                                              ClearConId = 0
@@ -240,7 +240,7 @@ const (
 	REACH_THE_GOAL_AFTER_DEFEATING_AT_LEAST_ALL_BANZAI_BILL                                                    ClearConId = 4293354249
 )
 
-type ClearConCategory int
+type ClearConCategory uint8
 
 const (
 	CATEGORY_NONE    ClearConCategory = 0
@@ -249,7 +249,7 @@ const (
 	CATEGORY_ACTIONS ClearConCategory = 3
 )
 
-type GameVersion int
+type GameVersion uint32
 
 const (
 	V1_0_0   GameVersion = 0
@@ -261,7 +261,7 @@ const (
 	VUNKNOWN GameVersion = 33
 )
 
-type CourseTheme int
+type CourseTheme uint8
 
 const (
 	OVERWORLD   CourseTheme = 0
@@ -276,7 +276,7 @@ const (
 	FOREST      CourseTheme = 9
 )
 
-type AutoscrollSpeed int
+type AutoscrollSpeed uint8
 
 const (
 	AUTOSCROLL_X1 AutoscrollSpeed = 0
@@ -284,7 +284,7 @@ const (
 	AUTOSCROLL_X3 AutoscrollSpeed = 2
 )
 
-type AutoscrollType int
+type AutoscrollType uint8
 
 const (
 	AUTOSCROLL_NONE AutoscrollType = 0
@@ -294,21 +294,21 @@ const (
 	CUSTOM          AutoscrollType = 4
 )
 
-type BoundaryType int
+type BoundaryType uint8
 
 const (
 	BUILT_ABOVE_LINE BoundaryType = 0
 	BUILT_BELOW_LINE BoundaryType = 0
 )
 
-type OrientationType int
+type OrientationType uint8
 
 const (
 	HORIZONTAL OrientationType = 0
 	VERTICAL   OrientationType = 1
 )
 
-type LiquidType int
+type LiquidType uint8
 
 const (
 	STATIC             LiquidType = 0
@@ -316,7 +316,7 @@ const (
 	RISING_AND_FALLING LiquidType = 2
 )
 
-type LiquidSpeed int
+type LiquidSpeed uint8
 
 const (
 	NONE      LiquidSpeed = 0
@@ -325,7 +325,7 @@ const (
 	LIQUID_X3 LiquidSpeed = 3
 )
 
-type SoundId int
+type SoundId uint8
 
 const (
 	SHOCK                SoundId = 0
