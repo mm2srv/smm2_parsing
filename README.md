@@ -44,6 +44,18 @@ func (s *BCD) SaveDecrypted() ([]byte, error)
 ```
 Save decrypted BCD from BCD struct.
 
+```go
+func EncodeToUCS2(str string) []byte
+```
+Encode string to UCS-2 slice, used to create `Name` and `Description` from strings.
+
+```go
+func DecodeFromUCS2(src []byte) (string, error)
+```
+Decode UCS-2 slice to string, used to create strings from `Name` and `Description`. If there is a dangling surrogate an error will be returned.
+
+A number of enums are also provided in `level_format_enums.go`.
+
 ### Thumbnail encryption
 ```go
 func EncryptJpegThumbnail(buf []byte) ([]byte, error)

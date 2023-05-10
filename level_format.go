@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"unicode/utf16"
 
 	"honnef.co/go/spew"
 )
@@ -243,6 +244,35 @@ func (s *BCD) SaveDecrypted() ([]byte, error) {
 		return []byte{}, err
 	}
 	return buf.Bytes(), err
+}
+
+func EncodeToUCS2(str string) []byte {
+	u := utf16.Encode([]rune(str))
+	dst := make([]byte, len(u)*2)
+	wi := 0
+	for _, r := range u {
+		binary.LittleEndian.PutUint16(dst[wi:], uint16(r))
+		wi += 2
+	}
+	return dst
+}
+
+func DecodeFromUCS2(src []byte) (string, error) {
+	l := len(src) / 2
+	dst := make([]rune, 0, l)
+	for ri := 0; ri < len(src)-1; ri = ri + 2 {
+		r := rune(binary.LittleEndian.Uint16(src[ri:]))
+		if utf16.IsSurrogate(r) {
+			if ri >= len(src)-3 {
+				return "", fmt.Errorf("dangling surrogate: %v", src[ri:])
+			}
+			ri += 2
+			r2 := rune(binary.LittleEndian.Uint16(src[ri:]))
+			r = utf16.DecodeRune(r, r2)
+		}
+		dst = append(dst, r)
+	}
+	return string(dst), nil
 }
 
 func RemoveUploadedFlag(rawBCD []byte) ([]byte, error) {
